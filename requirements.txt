@@ -1,0 +1,10 @@
+
+string==2.3.3
+nltk==3.6.6
+scikit-learn==0.24.2
+streamlit==1.19.0
+emoji==1.5.0
+Pillow==9.0.0
+matplotlib==3.5.0
+textblob==0.15.3
+vaderSentiment==3.3.2
