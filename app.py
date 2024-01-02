@@ -91,7 +91,7 @@ def home_page():
     </style>
 """, unsafe_allow_html=True)
 
-    st.markdown('<p class="custom-title">Depression Detection On Social Media</p>', unsafe_allow_html=True)
+    st.markdown('<p class="custom-title">Depression Detector With Sentiment Analysis</p>', unsafe_allow_html=True)
 
     st.info("Depression is a mental health condition that affects how a person feels and thinks thus affecting one’s daily activities and habits.\n Social media has become an avenue for people to let out their feelings and hence, by using this data, it can be studied if they have potential depression.")
  
@@ -99,7 +99,7 @@ def home_page():
     st.image(image_path1, width=650)
 
 
-    st.info("We can observe that a higher usage of social media correlates with individuals containing higher depressive symptoms. This project aims to detect the posibility if a user suffers from potential depression by analyzing one's inputed text.")
+    st.info("We can observe that a higher usage of social media correlates with individuals containing higher depressive symptoms. With that, this project aims to utilise machine learning to identify signs of depression in social media by analyzing inputed text from user")
 
     st.success("""
        To test the detector out, head over to the next page!
@@ -165,7 +165,8 @@ def eda_page():
     st.info("The charts below depict the exploratory data analysis observed in this project")
 
     tabs = ["Depression Analysis", "Non-Depression Analysis", "Positive Sentiment", "Negative Sentiment", "Neutral Sentiment", "Sentiment Distribution"]
-    selected_tab = st.radio("Explore the analysis!", tabs)
+    selected_tab = st.selectbox("Explore the analysis!", tabs)
+
 
 
     if selected_tab == "Depression Analysis":
@@ -223,7 +224,7 @@ def eda_page():
         wordcloud_image.thumbnail(max_size)
         st.image(wordcloud_image, use_column_width=True)
         st.markdown("""
-        This WordCloud visualizes the most frequent words in tweets labeled as positive sentiment. 
+        This WordCloud visualizes the most frequent words in tweets annoted as a positive sentiment. 
         The size of each word represents its frequency in the positive labelled tweets.
         """)
 
@@ -236,7 +237,7 @@ def eda_page():
         negative_wordcloud_image.thumbnail(max_size)
         st.image(negative_wordcloud_image, use_column_width=True)
         st.markdown("""
-        This WordCloud visualizes the most frequent words in tweets labeled as negative sentiment. 
+        This WordCloud visualizes the most frequent words in tweets annoted as a negative sentiment. 
         The size of each word represents its frequency in the negative labelled tweets.
         """)
 
@@ -249,7 +250,7 @@ def eda_page():
         neutral_wordcloud_image.thumbnail(max_size)
         st.image(neutral_wordcloud_image, use_column_width=True)
         st.markdown("""
-        This WordCloud visualizes the most frequent words in tweets labeled as neutral sentiment. 
+        This WordCloud visualizes the most frequent words in tweets annoted as a neutral sentiment. 
         The size of each word represents its frequency in the neutral labelled tweets.
         """)
 
@@ -279,13 +280,18 @@ def docu_page():
     st.info("The EDA page will display all the relevant analysis in accordance to this project. ")
    
     st.markdown("<h5>About</h5>", unsafe_allow_html=True)
-    st.info("This page contains information and crucial details about the creator of this web app as well as it's content")
+    st.info("This page contains information about the creator of this web app as well as it's content")
 
     # Provide links and information for support
 
 def about_page():
-    st.title("📊 Assessment Results")
-    st.success("Congratulations! You've completed the self-assessment.")
+    st.title("About")
+    st.markdown("<h5>Jared Thomas</h5>", unsafe_allow_html=True)
+
+    image_path66 = 'jtk pic crop.jpg'
+    st.image(image_path66, width=250)
+    st.info("Greetings! I'm Jared, a 3rd Year Data Science student from the University Of Malaya. Fueled by curiosity, I embark on a continuous journey of exploration, delving into new findings day in, day out. This project entitled 'Depression Detection On Social Media' utilises sentiment analysis as an additional feature for model training which is later used as the backend engine to identify if a user's inputed text contains possible depression or not. User may input a text of their choice and observe the model's analysis on it. ")
+
     # Display results and resources based on assessment
 
 # Configure Streamlit page layout
