@@ -10,6 +10,7 @@ import emoji
 import pickle
 from scipy.sparse import hstack
 from PIL import Image
+import pandas as pd
 
 
 import matplotlib.pyplot as plt
@@ -27,7 +28,7 @@ with open(tfidf_vectorizer_filename, 'rb') as vectorizer_file:
     tfidf_vectorizer = pickle.load(vectorizer_file)
 
 # Load the pre-trained machine learning model using pickle
-model_filename = 'LogRegModelEx.sav'  # Adjust the filename if needed
+model_filename = 'SVMEXMODEL2.sav'  # Adjust the filename if needed
 with open(model_filename, 'rb') as model_file:
     loaded_model = pickle.load(model_file)
 
@@ -83,7 +84,7 @@ def home_page():
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         .custom-title {
-            font-family: 'Times New Roman', sans-serif;
+            font-family: 'Helvetica', sans-serif;
             font-size: 36px;
             color: #000000;  /* Change to your preferred color */
             font-weight: bold;  /* Add this line for bold text */
@@ -91,25 +92,34 @@ def home_page():
     </style>
 """, unsafe_allow_html=True)
 
-    st.markdown('<p class="custom-title">Depression Detector With Sentiment Analysis</p>', unsafe_allow_html=True)
+    st.markdown('<p class="custom-title">Depression Detection</p>', unsafe_allow_html=True)
 
-    st.info("Depression is a mental health condition that affects how a person feels and thinks thus affecting one’s daily activities and habits.\n Social media has become an avenue for people to let out their feelings and hence, by using this data, it can be studied if they have potential depression.")
- 
-    image_path1 = 'slide chart.jpg'
-    st.image(image_path1, width=650)
+    st.info("Welcome to the Depression Detector App! Here, you'll be able to learn more on this social issue as well as identify if what you say may contain possible depression. Explore the app to understand more on this project! ")
+    st.markdown("### Did you know?")
+    st.markdown("Close to 280 million people worldwide suffer from depression. That's an approximate 3.9% of the world's population. This causes a negative impact to lives of individuals in their work environment, relationships and also daily productivity.")
 
+    st.markdown("### How about Malaysia?")
+    st.markdown("Studies have shown 2.3% of Malaysians adults are facing the highest rates of depression with young adults (ages 18-29) spearheading the leaderboard. ")
+    
+    
+    st.markdown("### Current Trend")
+    st.markdown("Individuals now prefer expressing themselves on social media by sharing their opinions and feelings on various topics. This acts as a platform for data to be collected and analyzed which is later used to build a system that can determine the presence of depression within a text.") 
+    #image_path1 = 'slide chart.jpg'
+    #st.image(image_path1, width=650)
 
-    st.info("We can observe that a higher usage of social media correlates with individuals containing higher depressive symptoms. With that, this project aims to utilise machine learning to identify signs of depression in social media by analyzing inputed text from user")
+    #st.info("We can observe that a higher usage of social media correlates with individuals containing higher depressive symptoms. With that, this project aims to utilise machine learning to identify signs of depression in social media by analyzing inputed text from user")
 
     st.success("""
-       To test the detector out, head over to the next page!
+       Go to the next page to test out the Depression Detector!
     """)
+
+
 
 def depDetect_page():
     st.title("📊 Depression Detector")
     st.success("1. Firstly, insert a text you wish to analyze\n2. Then, click the 'Try it out' button\n3. Your result will be displayed below")
 
-    user_text = st.text_area("Your text :", max_chars=500, height=150)
+    user_text = st.text_area("What do you wish to say? ", max_chars=250, height=150)
 
     if st.button("Try it out"):
         # Preprocess user text
@@ -153,13 +163,11 @@ def depDetect_page():
         # Perform prediction with the loaded model
         result = loaded_model.predict(test_text)
         if result == 0:
-            st.warning("Assesment Result : Possible depression detected.")
+            st.warning("Assesment Result : Depression detected.")
             
         else:
-            st.success("Assesment Result : No signs of depression detected.")
+            st.success("Assesment Result : No depression detected.")
            
-    # Display results and resources based on assessment
-
 def eda_page():
     st.title("Exploratory Data Analysis")
     st.info("The charts below depict the exploratory data analysis observed in this project")
@@ -178,8 +186,8 @@ def eda_page():
         wordcloud_image.thumbnail(max_size)
         st.image(wordcloud_image, use_column_width=True)
         st.markdown("""
-        This WordCloud visualizes the most frequent words in tweets labeled as depressive. 
-        The size of each word represents its frequency in the dataset.
+        This WordCloud visualizes the most frequent words in tweets labeled for depression. 
+        The size of each word represents its frequency in the dataset. It can be observed that words such as 'cant', 'today' and 'work' are having one of the highest frequencies.
         """)
 
         st.markdown("### Random Words Associated With Depression ")
@@ -189,8 +197,11 @@ def eda_page():
         another_image.thumbnail(max_size_another)
         st.image(another_image, use_column_width=True)
         st.markdown("""
-        The chart above displays random words from the dataset that are Depression tagged.
+        The chart above displays random words from the dataset that are Depression tagged. Words such as 'know', 'thing' and 'feel' seem to be standing out which indicates a focus on cognitive and emotional elements such as reference to thought, mental processes and also emotions.
         """)
+
+        st.markdown("### Sample Text ")
+        st.markdown(" Sample : 'is upset that he can't update his Facebook by texting it... and might cry as a result  School today also. Blah!' ")
 
     if selected_tab == "Non-Depression Analysis":
         # WordCloud for Non-Depression Analysis
@@ -201,8 +212,8 @@ def eda_page():
         wordcloud_image.thumbnail(max_size)
         st.image(wordcloud_image, use_column_width=True)
         st.markdown("""
-        This WordCloud visualizes the most frequent words in tweets labelled as Non-Depressive.
-        The size of each word represents its frequency in the dataset.
+        This WordCloud visualizes the most frequent words in tweets labelled for Non-Depression.
+        The size of each word represents its frequency in the dataset. It can be observed that words such as 'thank', 'love' and 'time' are having one of the highest frequencies.
         """)
 
         st.markdown("### Random Words Associated With Non-Depression ")
@@ -212,9 +223,12 @@ def eda_page():
         another_image2.thumbnail(max_size_another2)
         st.image(another_image2, use_column_width=True)
         st.markdown("""
-        The chart above displays random words from the dataset that are Non-Depression tagged.
+        The chart above displays random words from the dataset that are Non-Depression tagged. Words such as 'going', 'time' and 'lol' seem to have relatively higher frequencies which indicates a positive and light atmosphere. For instance, 'Going' suggest's optimism as it is linked with carrying out an activity or plan.
         """)
 
+        st.markdown("### Sample Text ")
+        st.markdown(" Sample : 'Good morning people of twitter. TGIFriday! Thats wassssup! Today is going to be a hellofagood day!' ")
+                    
     if selected_tab == "Positive Sentiment":
         # WordCloud for Positive Sentiment
         st.markdown("### WordCloud for Positive Sentiment")
@@ -224,7 +238,7 @@ def eda_page():
         wordcloud_image.thumbnail(max_size)
         st.image(wordcloud_image, use_column_width=True)
         st.markdown("""
-        This WordCloud visualizes the most frequent words in tweets annoted as a positive sentiment. 
+        This WordCloud visualizes the most frequent words in the dataset annoted as a positive sentiment. 
         The size of each word represents its frequency in the positive labelled tweets.
         """)
 
@@ -244,7 +258,7 @@ def eda_page():
     elif selected_tab == "Neutral Sentiment":
         # WordCloud for Neutral Sentiment
         st.markdown("### WordCloud for Neutral Sentiment")
-        neutral_wordcloud_image_path = 'neutral_wordcloud.png'  # Update with the correct file path
+        neutral_wordcloud_image_path = 'neutral22.png'  # Update with the correct file path
         neutral_wordcloud_image = Image.open(neutral_wordcloud_image_path)
         max_size = (450, 200)  # Adjust the size as needed
         neutral_wordcloud_image.thumbnail(max_size)
@@ -271,30 +285,61 @@ def docu_page():
     st.title("Documentation")
 
     st.markdown("<h5>Home</h5>", unsafe_allow_html=True)
-    st.info("The home page displays the introduction to the depression detection project by highlighting it's aims.")
+    st.info("The home page displays the introduction and some facts related to depression and the project. ")
    
     st.markdown("<h5>Depression Detector</h5>", unsafe_allow_html=True)
-    st.info("This page contains a trained machine learning model which is used to detect the possibility of depression based on user input text. User can enter text and identify the result based on the steps shown in the page.")
+    st.info("This page contains a trained machine learning model which is used to detect the presence of depression based on user input text. User can enter text and identify the result based on the steps shown in the page.")
     
     st.markdown("<h5>Exploratory Data Analysis</h5>", unsafe_allow_html=True)
-    st.info("The EDA page will display all the relevant analysis in accordance to this project. ")
+    st.info("The EDA page will display all the relevant analysis in accordance to this project such as understanding the words associated with depression and non-depression as well as the overview of the sentiments from the text.")
    
     st.markdown("<h5>About</h5>", unsafe_allow_html=True)
-    st.info("This page contains information about the creator of this web app as well as it's content")
+    st.info("This page contains information about the creator of this web app as well as more information about the project.")
 
     # Provide links and information for support
 
 def about_page():
     st.title("About")
-    st.markdown("<h5>Jared Thomas</h5>", unsafe_allow_html=True)
 
-    image_path66 = 'jtk pic crop.jpg'
-    st.image(image_path66, width=250)
-    st.info("Greetings! I'm Jared, a 3rd Year Data Science student from the University Of Malaya. Fueled by curiosity, I embark on a continuous journey of exploration, delving into new findings day in, day out. This project entitled 'Depression Detection On Social Media' utilises sentiment analysis as an additional feature for model training which is later used as the backend engine to identify if a user's inputed text contains possible depression or not. User may input a text of their choice and observe the model's analysis on it. ")
+    tabs2 = ["The Creator", "The Project"]
+    selected_tab2 = st.selectbox("Learn more about : ", tabs2)
 
-    # Display results and resources based on assessment
 
-# Configure Streamlit page layout
+    if selected_tab2 == "The Creator":
+        st.markdown("<h5>Jared Thomas</h5>", unsafe_allow_html=True)
+        image_path66 = 'jtk pic crop.jpg'
+        st.image(image_path66, width=250)
+        info_text = "Greetings! I'm Jared, a 3rd Year Data Science student from the University Of Malaya. Fueled by curiosity, I embark on a continuous journey of exploration, delving into new findings day in, day out. I believe that knowledge is power and this drives me to continuously learn and push myself beyond boundaries. Check out my [LinkedIn](https://www.linkedin.com/in/jared-thomas-615abb234/) & [Github](https://github.com/dashboard)"
+
+        # Display the modified text with hyperlinks
+        st.markdown(info_text, unsafe_allow_html=True)
+
+    elif selected_tab2 == "The Project":
+        # Sentiment Distribution
+        st.markdown("### Depression Detector With Sentiment Analysis")
+        st.info("This project utilises sentiment analysis as an additional feature for model training which is later used as the backend engine to identify if a user's inputed text is positive for depression. User may input a text of their choice and observe the model's analysis on it. ")
+
+        st.markdown("### Dataset used")
+        info_text4 = "The dataset used is Sentiment140 which is sourced from Kaggle. It contains 1,048,576 rows, but only 60,000 rows were randomly sampled for each category being depression and non-depression. You may view the dataset [here](https://www.kaggle.com/datasets/kazanova/sentiment140)."
+
+    # Display the modified text with a hyperlink
+        st.markdown(info_text4, unsafe_allow_html=True)
+
+        #image_path67 = 'LabelNew.png'
+        #st.image(image_path67, width=600)
+
+        st.markdown("### Feature Extraction & Engineering")
+        st.markdown("Term Frequency-Inverse Document Frequency (TFIDF) - To identify the importance of a word to it's document. Sentiment analysis was also carried out where sentiments of tweets were determined. Then, TFIDF is combined with features generated from sentiment analysis and fed to the model for training.")
+
+        st.markdown("### Machine Learning Model")
+        st.markdown("As this is a classification problem, the model used is Support Vector Machine. After carrying out modelling with numerous ML algorithms, it was reported with Support Vector Machine having the best outcome. ")
+
+        st.markdown("##### Model Performance")
+        image_path80 = 'results.png'
+        st.image(image_path80, width=450)
+
+
+        
 st.set_page_config(layout="wide")
 
 # Customize tab font size and style
@@ -331,3 +376,5 @@ with tabs[3]:
     docu_page()
 with tabs[4]:
     about_page()
+
+
