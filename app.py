@@ -320,7 +320,7 @@ def about_page():
         st.info("This project utilises sentiment analysis as an additional feature for model training which is later used as the backend engine to identify if a user's inputed text is positive for depression. User may input a text of their choice and observe the model's analysis on it. ")
 
         st.markdown("### Dataset used")
-        info_text4 = "The dataset used is Sentiment140 which is sourced from Kaggle. It contains 1,048,576 rows, but only 60,000 rows were randomly sampled for each category being depression and non-depression. You may view the dataset [here](https://www.kaggle.com/datasets/kazanova/sentiment140)."
+        info_text4 = "The dataset used is sourced from Kaggle. It contains 1,048,576 rows, but only 60,000 rows were randomly sampled for each category being depression and non-depression."
 
     # Display the modified text with a hyperlink
         st.markdown(info_text4, unsafe_allow_html=True)
