@@ -325,8 +325,8 @@ def about_page():
     # Display the modified text with a hyperlink
         st.markdown(info_text4, unsafe_allow_html=True)
 
-        #image_path67 = 'LabelNew.png'
-        #st.image(image_path67, width=600)
+        image_path67 = 'LabelNew.png'
+        st.image(image_path67, width=600)
 
         st.markdown("### Feature Extraction & Engineering")
         st.markdown("Term Frequency-Inverse Document Frequency (TFIDF) - To identify the importance of a word to it's document. Sentiment analysis was also carried out where sentiments of tweets were determined. Then, TFIDF is combined with features generated from sentiment analysis and fed to the model for training.")
