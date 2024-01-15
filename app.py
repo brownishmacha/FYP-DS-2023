@@ -92,7 +92,7 @@ def home_page():
     </style>
 """, unsafe_allow_html=True)
 
-    st.markdown('<p class="custom-title">Depression Detection</p>', unsafe_allow_html=True)
+    st.markdown('<p class="custom-title">Depression Detector</p>', unsafe_allow_html=True)
 
     st.info("Welcome to the Depression Detector App! Here, you'll be able to learn more on this social issue as well as identify if what you say may contain possible depression. Explore the app to understand more on this project! ")
     st.markdown("### Did you know?")
