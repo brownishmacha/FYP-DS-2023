@@ -316,7 +316,7 @@ def about_page():
 
     elif selected_tab2 == "The Project":
         # Sentiment Distribution
-        st.markdown("### Depression Detector With Sentiment Analysis")
+        st.markdown("### Depression Detector")
         st.info("This project utilises sentiment analysis as an additional feature for model training which is later used as the backend engine to identify if a user's inputed text is positive for depression. User may input a text of their choice and observe the model's analysis on it. ")
 
         st.markdown("### Dataset used")
