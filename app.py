@@ -180,14 +180,14 @@ def eda_page():
     if selected_tab == "Depression Analysis":
         # WordCloud for Depression Analysis
         st.markdown("### WordCloud for Depression tagged words")
-        wordcloud_image_path = 'depression_wordcloud.png'  # Update with the correct file path
+        wordcloud_image_path = 'newDepClou.png'  # Update with the correct file path
         wordcloud_image = Image.open(wordcloud_image_path)
         max_size = (400, 200)  # Adjust the size as needed
         wordcloud_image.thumbnail(max_size)
         st.image(wordcloud_image, use_column_width=True)
         st.markdown("""
         This WordCloud visualizes the most frequent words in tweets labeled for depression. 
-        The size of each word represents its frequency in the dataset. It can be observed that words such as 'cant', 'today' and 'work' are having one of the highest frequencies.
+        The size of each word represents its frequency in the dataset. It can be observed that words such as 'got', 'today' and 'work' are having one of the highest frequencies.
         """)
 
         st.markdown("### Random Words Associated With Depression ")
@@ -206,7 +206,7 @@ def eda_page():
     if selected_tab == "Non-Depression Analysis":
         # WordCloud for Non-Depression Analysis
         st.markdown("### WordCloud for Non-Depression tagged words")
-        wordcloud_image_path = 'Nodepression_wordcloud.png'  # Update with the correct file path
+        wordcloud_image_path = 'newNoDepclou.png'  # Update with the correct file path
         wordcloud_image = Image.open(wordcloud_image_path)
         max_size = (400, 200)  # Adjust the size as needed
         wordcloud_image.thumbnail(max_size)
@@ -232,7 +232,7 @@ def eda_page():
     if selected_tab == "Positive Sentiment":
         # WordCloud for Positive Sentiment
         st.markdown("### WordCloud for Positive Sentiment")
-        wordcloud_image_path = 'positive_wordcloud.png'  # Update with the correct file path
+        wordcloud_image_path = 'wcloudNewPos.png'  # Update with the correct file path
         wordcloud_image = Image.open(wordcloud_image_path)
         max_size = (400, 200)  # Adjust the size as needed
         wordcloud_image.thumbnail(max_size)
@@ -245,7 +245,7 @@ def eda_page():
     elif selected_tab == "Negative Sentiment":
         # WordCloud for Negative Sentiment
         st.markdown("### WordCloud for Negative Sentiment")
-        negative_wordcloud_image_path = 'negative_wordcloud.png'  # Update with the correct file path
+        negative_wordcloud_image_path = 'wcloudNewNega.png'  # Update with the correct file path
         negative_wordcloud_image = Image.open(negative_wordcloud_image_path)
         max_size = (400, 200)  # Adjust the size as needed
         negative_wordcloud_image.thumbnail(max_size)
@@ -258,7 +258,7 @@ def eda_page():
     elif selected_tab == "Neutral Sentiment":
         # WordCloud for Neutral Sentiment
         st.markdown("### WordCloud for Neutral Sentiment")
-        neutral_wordcloud_image_path = 'neutral22.png'  # Update with the correct file path
+        neutral_wordcloud_image_path = 'wcloudNewNeutr.png'  # Update with the correct file path
         neutral_wordcloud_image = Image.open(neutral_wordcloud_image_path)
         max_size = (450, 200)  # Adjust the size as needed
         neutral_wordcloud_image.thumbnail(max_size)
@@ -329,7 +329,7 @@ def about_page():
         st.image(image_path67, width=600)
 
         st.markdown("### Feature Extraction & Engineering")
-        st.markdown("Term Frequency-Inverse Document Frequency (TFIDF) - To identify the importance of a word to it's document. Sentiment analysis was also carried out where sentiments of tweets were determined. Then, TFIDF is combined with features generated from sentiment analysis and fed to the model for training.")
+        st.markdown("Term Frequency-Inverse Document Frequency (TFIDF) - To identify the importance of a word to it's document. N-grams (Unigrams) were also used. Sentiment analysis was also carried out where sentiments of tweets were determined. Then, TFIDF with Unigram is combined with features generated from sentiment analysis and fed to the model for training and testing.")
 
         st.markdown("### Machine Learning Model")
         st.markdown("As this is a classification problem, the model used is Support Vector Machine. After carrying out modelling with numerous ML algorithms, it was reported with Support Vector Machine having the best outcome. ")
